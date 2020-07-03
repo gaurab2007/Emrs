@@ -30,7 +30,7 @@ export class EmployeeListComponent implements OnInit {
       this.employeeParam.pageNumber = 1;
       this.employeeParam.pageSize = 5;
 
-      if (this.employees != null) {
+      if (this.employees != null && this.employees.length > 0) {
         this.employeeParam.totalItems = this.employees[0].totalDataCount;
       }
     });
