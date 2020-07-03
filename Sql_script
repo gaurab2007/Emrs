@@ -1,0 +1,142 @@
+USE [EmrsDb]
+GO
+/****** Object:  Table [dbo].[PT_Patient]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PT_Patient](
+	[PT_Id] [int] IDENTITY(1,1) NOT NULL,
+	[PT_FirstName] [nvarchar](60) NOT NULL,
+	[PT_MiddleName] [nvarchar](60) NULL,
+	[PT_LastName] [nvarchar](60) NULL,
+	[PT_Gender] [char](6) NOT NULL,
+	[PT_Dob] [datetime] NOT NULL,
+	[PT_City] [nvarchar](100) NOT NULL,
+	[PT_Country] [nvarchar](100) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblEmployee]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblEmployee](
+	[EmployeeId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](20) NOT NULL,
+	[City] [varchar](20) NOT NULL,
+	[Department] [varchar](20) NOT NULL,
+	[Gender] [varchar](6) NOT NULL,
+	[Dob] [datetime] NULL,
+	[CreatedDate] [datetime] NULL,
+	[ModifyDate] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[Get_employee_ById]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ 
+CREATE procedure [dbo].[Get_employee_ById] 
+(
+	@id INT
+)
+as      
+Begin      
+    select EmployeeId,
+           Name,
+           City,
+           Department,
+           Gender,
+		   Dob
+    from dbo.tblEmployee  WHERE EmployeeId= @id  
+End
+GO
+/****** Object:  StoredProcedure [dbo].[spAddEmployee]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[spAddEmployee]         
+(        
+    @Name VARCHAR(20),         
+    @City VARCHAR(20),        
+    @Department VARCHAR(20),        
+    @Gender VARCHAR(6),
+	@Dob DATETIME
+
+)        
+as         
+Begin         
+    Insert into tblEmployee (Name,City,Department, Gender,Dob,CreatedDate)         
+    Values (@Name,@City,@Department, @Gender,@Dob,GETUTCDATE())         
+End
+GO
+/****** Object:  StoredProcedure [dbo].[spDeleteEmployee]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[spDeleteEmployee]       
+(        
+   @EmpId int        
+)        
+as         
+begin        
+   Delete from tblEmployee where EmployeeId=@EmpId        
+End
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllEmployees]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[spGetAllEmployees]
+(
+	@SearchText NVARCHAR(100) = NULL,
+	@PageNumber INT,
+    @PageSize   INT
+)
+as      
+Begin      
+    select EmployeeId,
+           Name,
+           City,
+           Department,
+           Gender,
+		   COUNT(*) OVER() AS 'Total',
+		   CreatedDate
+    from dbo.tblEmployee
+	WHERE ((@searchText IS NULL) OR ([Name] LIKE '%' + @searchText + '%' OR Department LIKE '%' + @searchText + '%' OR City LIKE '%' + @searchText + '%' ) ) 
+	ORDER BY CreatedDate DESC
+    OFFSET @PageSize * (@PageNumber - 1) ROWS
+    FETCH NEXT @PageSize ROWS ONLY OPTION (RECOMPILE);
+End
+GO
+/****** Object:  StoredProcedure [dbo].[spUpdateEmployee]    Script Date: 03-07-2020 16:09:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[spUpdateEmployee]        
+(        
+   @EmpId INTEGER ,      
+   @Name VARCHAR(20),       
+   @City VARCHAR(20),      
+   @Department VARCHAR(20),      
+   @Gender VARCHAR(6),
+   @Dob DATETIME
+)        
+as        
+begin        
+   Update tblEmployee         
+   set Name=@Name,        
+   City=@City,        
+   Department=@Department,      
+   Gender=@Gender,
+   Dob=@Dob,
+   ModifyDate=GETUTCDATE()
+   where EmployeeId=@EmpId        
+End
+GO
