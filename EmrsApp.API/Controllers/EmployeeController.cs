@@ -30,11 +30,42 @@ namespace EmrsApp.API.Controllers
 
         [HttpGet]
         [Route("all")]
-        public async Task<IActionResult> GetEmployeesAsync()
+        public async Task<IActionResult> GetEmployeesAsync([FromQuery] EmployeeQueryParams queryParams)
         {
-            var employees = await _objEmployee.GetAllEmployeesAsync();
-            var employeeToReturn = _mapper.Map<IEnumerable<EmployeeForListDto>>(employees).OrderBy(e=>e.Name);
+            var employees = await _objEmployee.GetAllEmployeesAsync(queryParams);
+            var employeeToReturn = _mapper.Map<IEnumerable<EmployeeForListDto>>(employees);
             return Ok(employeeToReturn);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Details(int id)
+        {
+            var employee = _objEmployee.GetEmployeeData(id);
+            var employeeToReturn = _mapper.Map<EmployeeForDetailDto>(employee);
+            return Ok(employeeToReturn);
+        }
+
+
+        [HttpPost]
+        [Route("Create")]
+        public int Create([FromBody] Employee employee)
+        {
+            return _objEmployee.AddEmployee(employee);
+        }
+
+        [HttpPut]
+        [Route("Edit")]
+        public int Edit([FromBody] Employee employee)
+        {
+            return _objEmployee.UpdateEmployee(employee);
+        }
+
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        public int Delete(int id)
+        {
+            return _objEmployee.DeleteEmployee(id);
         }
 
     }

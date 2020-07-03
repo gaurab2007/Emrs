@@ -1,11 +1,9 @@
-export interface Employee {
+
+export interface EmployeeDetail {
   id: number;
   name: string;
   gender: string;
   department: string;
   city: string;
-  totalDataCount: number;
-  dob:Date;
+  dob: Date;
 }
-
-

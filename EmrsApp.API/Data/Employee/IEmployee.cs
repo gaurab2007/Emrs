@@ -7,7 +7,7 @@ namespace EmrsApp.API.Data
     public interface IEmployee
     {
         IEnumerable<Employee> GetAllEmployees();
-        Task<IEnumerable<Employee>> GetAllEmployeesAsync();
+        Task<IEnumerable<Employee>> GetAllEmployeesAsync(EmployeeQueryParams queryParams);
         int AddEmployee(Employee employee);
         int UpdateEmployee(Employee employee);
         Employee GetEmployeeData(int id);

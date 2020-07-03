@@ -1,0 +1,66 @@
+<div *ngIf="loggedIn()">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <a class="navbar-brand" [routerLink]="['/home']">Emrs App</a> 
+      <ul class="navbar-nav mr-auto">
+      
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/employes']"  > Eployee </a>
+        </li>
+      
+      </ul>
+      <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <!-- <span class="mr-1">
+          <img src="{{photoUrl || '../../../assets/user.png'}}">
+        </span> -->
+        <a class="dropdown-toggle text-light" dropdownToggle>
+          Welcome {{ decodedToken | titlecase }}
+        </a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/member/edit']">
+            <i class="fa fa-user"></i> Edit profile</a
+          >
+          <div class="dropDown divider"></div>
+          <a class="dropdown-item" (click)="logout()">
+            <i class="fa fa-sign-out"></i> Logout</a
+          >
+        </div>
+      </div>
+  </nav>  
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active">Data</li>
+  </ol>
+</div>
+
+
+<div *ngIf="!loggedIn()"  class="sign-in-container" > 
+  <form class="form-signin text-center" #loginForm="ngForm" (ngSubmit)="login()"> 
+    <img class="mb-4" src="../../assets/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label class="sr-only">Username</label>
+    <input type="text" 
+           class="form-control mr-sm-2" 
+           placeholder="UserId" 
+           required 
+           name="username"
+           [(ngModel)]="model.username" >
+    <label class="sr-only">Password</label>
+    <input type="password" 
+           class="form-control mr-sm-2"
+           placeholder="password" 
+           required
+           name="password"
+           [(ngModel)]="model.password">
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" 
+            type="submit"
+            [disabled]="!loginForm.valid">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2020-2021</p> 
+  </form>
+  
+</div>

@@ -1,3 +1,138 @@
-<p>
-  employee-new works!
-</p>
+
+<form
+  [formGroup]="employeeForm" 
+  #formDir="ngForm" 
+>
+  <div class="container mt-5">
+    <h2 class="text-center text-primary">Eployee</h2>
+    <hr /> 
+    <div class="col-sm-8 offset-sm-2">
+      <div *ngIf="employeeForm.dirty" class="alert alert-info">
+        <strong>Information:</strong> You have made changes. Any unsaved changes
+        will be lost!
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label col-md-12">Name</label>
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control is-invalid"
+          formControlName="name"
+          placeholder="Name"
+          [ngClass]="{
+            'is-invalid': employeeForm.get('name').errors
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="employeeForm.get('name').errors && formDir.submitted"
+        >
+          Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="Gender">Gender</label>
+      <div class="col-md-4">
+        <select
+          class="form-control"
+          data-val="true"
+          formControlName="gender"
+          [ngClass]="{
+            'is-invalid': employeeForm.get('gender').errors
+          }"
+        >
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="employeeForm.get('gender').errors && formDir.submitted"
+        >
+          Gender is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="Department">Date of birth</label>
+      <div class="col-md-4">
+        <input
+          class="form-control is-invalid"
+          [ngClass]="{
+            'is-invalid':
+            employeeForm.get('dob').errors  
+          }"
+          class="form-control"
+          placeholder="Date of Birth"
+          formControlName="dob"
+          type="text" 
+          bsDatepicker
+          [bsConfig]="bsConfig"
+        />
+
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            employeeForm.hasError('required', 'dob') && formDir.submitted
+          "
+        >
+          Date of birth is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="Department">Department</label>
+      <div class="col-md-4">
+        <input
+          class="form-control is-invalid"
+          type="text"
+          formControlName="department"
+          placeholder="Department"
+          [ngClass]="{
+            'is-invalid': employeeForm.get('department').errors
+          }"
+        />
+
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            employeeForm.hasError('required', 'department') && formDir.submitted
+          "
+        >
+          Department is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-md-12" for="City">City</label>
+      <div class="col-md-4">
+        <input
+          class="form-control is-invalid"
+          type="text"
+          formControlName="city"
+          data-val="true"
+          placeholder="City"
+          [ngClass]="{
+            'is-invalid': employeeForm.get('city').errors
+          }"
+        />
+
+        <div
+          class="invalid-feedback"
+          *ngIf="employeeForm.hasError('required', 'city') && formDir.submitted"
+        >
+          City is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="!employeeForm.valid" (click)="save()" class="btn btn-primary mr-2">Save</button>
+      <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

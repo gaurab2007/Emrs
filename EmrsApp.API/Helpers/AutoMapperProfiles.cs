@@ -4,12 +4,13 @@ using EmrsApp.API.Models;
 
 namespace EmrsApp.API.Helpers
 {
-    public class AutoMapperProfiles: Profile
+    public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles()
         {
             CreateMap<Employee, EmployeeForListDto>();
+            CreateMap<Employee, EmployeeForDetailDto>();
         }
-        
+
     }
 }
