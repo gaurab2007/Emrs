@@ -10,6 +10,7 @@ namespace EmrsApp.API.Helpers
         {
             CreateMap<Employee, EmployeeForListDto>();
             CreateMap<Employee, EmployeeForDetailDto>();
+            CreateMap<Employee, EmployeeAfterSuccessfulLoginDto>();
         }
 
     }

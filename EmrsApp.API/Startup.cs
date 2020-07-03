@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmrsApp.API.Data;
+using EmrsApp.API.Data.Login;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace EmrsApp.API
         {
             services.AddCors();
             services.AddTransient<IEmployee, EmployeeRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddControllers();
             services.AddAutoMapper(typeof(EmployeeRepository).Assembly);
         }
