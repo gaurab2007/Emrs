@@ -6,6 +6,9 @@ export interface Employee {
   city: string;
   totalDataCount: number;
   dob:Date;
+  username:string;
+  password:string;
+
 }
 
 

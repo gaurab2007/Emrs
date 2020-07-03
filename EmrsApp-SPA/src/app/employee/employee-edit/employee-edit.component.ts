@@ -36,10 +36,10 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bsConfig = { 
+    this.bsConfig = {
       containerClass: 'theme-dark-blue',
       dateInputFormat: 'DD/MM/YYYY',
-      isAnimated: true
+      isAnimated: true,
     };
     this.loadEmployee();
     this.editEmployeeRegisterForm();
@@ -55,6 +55,8 @@ export class EmployeeEditComponent implements OnInit {
       city: ['', [Validators.required]],
     });
   }
+
+ 
 
   loadEmployee() {
     if (this.employeeId > 0) {

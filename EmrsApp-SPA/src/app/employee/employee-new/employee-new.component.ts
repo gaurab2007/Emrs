@@ -38,20 +38,39 @@ export class EmployeeNewComponent implements OnInit {
   }
 
   createEmployeeRegisterForm() {
-    this.employeeForm = this.fb.group({
-      id: 0,
-      name: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      dob: [null, Validators.required],
-      department: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-    });
+    this.employeeForm = this.fb.group(
+      {
+        id: 0,
+        name: ['', [Validators.required]],
+        gender: ['', [Validators.required]],
+        dob: [null, Validators.required],
+        department: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        username: ['', [Validators.required]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(8),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      { validator: this.passwordMatchValidator }
+    );
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('confirmPassword').value
+      ? null
+      : { mismatch: true };
   }
 
   save() {
     if (!this.employeeForm.valid) {
       return;
-    } 
+    }
 
     this.employeService.saveEmployee(this.employeeForm.value).subscribe(
       (data) => {

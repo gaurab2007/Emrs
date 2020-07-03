@@ -23,6 +23,9 @@ namespace EmrsApp.API.Data
         {
             try
             {
+                byte[] passwordHash, passwordSalt;
+                CryptographyHelper.createPasswordHash(employee.Password,out passwordHash,out passwordSalt);
+
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("spAddEmployee", con);
@@ -32,6 +35,9 @@ namespace EmrsApp.API.Data
                     cmd.Parameters.AddWithValue("@Department", employee.Department);
                     cmd.Parameters.AddWithValue("@City", employee.City);
                     cmd.Parameters.AddWithValue("@Dob", employee.Dob);
+                    cmd.Parameters.AddWithValue("@Username", employee.Username);
+                    cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    cmd.Parameters.AddWithValue("@PasswordSalt", passwordSalt);
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();

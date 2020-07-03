@@ -54,27 +54,26 @@
     </div>
 
     <div class="form-group row">
-      <label class="control-label col-md-12" for="Department">Date of birth</label>
+      <label class="control-label col-md-12" for="Department"
+        >Date of birth</label
+      >
       <div class="col-md-4">
         <input
           class="form-control is-invalid"
           [ngClass]="{
-            'is-invalid':
-            employeeForm.get('dob').errors  
+            'is-invalid': employeeForm.get('dob').errors
           }"
           class="form-control"
           placeholder="Date of Birth"
           formControlName="dob"
-          type="text" 
+          type="text"
           bsDatepicker
           [bsConfig]="bsConfig"
         />
 
         <div
           class="invalid-feedback"
-          *ngIf="
-            employeeForm.hasError('required', 'dob') && formDir.submitted
-          "
+          *ngIf="employeeForm.hasError('required', 'dob') && formDir.submitted"
         >
           Date of birth is required
         </div>
@@ -127,6 +126,10 @@
         </div>
       </div>
     </div>
+
+    
+
+
     <div class="form-group">
       <button
         [disabled]="!employeeForm.valid"
