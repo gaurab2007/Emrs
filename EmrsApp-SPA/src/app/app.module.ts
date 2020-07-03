@@ -9,7 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
-
+import { BreadcrumbModule } from 'angular-crumbs';
 
 import { AppComponent } from './app.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
@@ -43,6 +43,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BreadcrumbModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot(),
@@ -61,7 +62,7 @@ export function tokenGetter() {
     NotificationService,
     EmployeeListsResolver,
     PreventUnsavedChanges,
-    PreventUnsavedChangesEdit
+    PreventUnsavedChangesEdit,
   ],
   bootstrap: [AppComponent],
 })
