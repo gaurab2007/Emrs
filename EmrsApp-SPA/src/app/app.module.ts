@@ -8,6 +8,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {BreadcrumbModule} from 'angular-crumbs';
 
 import { AppComponent } from './app.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
@@ -42,6 +43,7 @@ import { PreventUnsavedChangesEdit } from './guards/prevent-unsaved-changes-empl
     ToastrModule.forRoot(),
     PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    BreadcrumbModule
   ],
   providers: [
     AuthService,

@@ -8,21 +8,24 @@ import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { PreventUnsavedChangesEdit } from './guards/prevent-unsaved-changes-employee-edit.guard';
 
 export const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home' } },
   {
     path: 'employes',
     component: EmployeeListComponent,
     resolve: { employees: EmployeeListsResolver },
+    data: { breadcrumb: 'Employees' }
   },
   {
     path: 'employes/new',
     component: EmployeeNewComponent,
     canDeactivate: [PreventUnsavedChanges],
+    data: { breadcrumb: 'New' }
   },
   {
     path: 'employes/:id',
     component: EmployeeEditComponent,
     canDeactivate: [PreventUnsavedChangesEdit],
+    data: { breadcrumb: 'Detail' }
   },
   // { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

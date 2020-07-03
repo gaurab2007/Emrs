@@ -5,6 +5,7 @@ import { NotificationService } from 'src/app/Service/notification.service';
 import { EmployeeService } from 'src/app/Service/employee.Service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { EmployeeDetail } from 'src/app/models/EmployeeDetail';
+import {BreadcrumbService} from 'angular-crumbs';
 
 @Component({
   selector: 'app-employee-edit',
@@ -28,7 +29,8 @@ export class EmployeeEditComponent implements OnInit {
     private router: Router,
     private notification: NotificationService,
     private employeService: EmployeeService,
-    private avRoute: ActivatedRoute
+    private avRoute: ActivatedRoute,
+    private breadcrumbService: BreadcrumbService
   ) {
     if (this.avRoute.snapshot.params['id']) {
       this.employeeId = this.avRoute.snapshot.params['id'];
@@ -66,6 +68,7 @@ export class EmployeeEditComponent implements OnInit {
             response.dob = new Date(response.dob);
           }
           this.employeeForm.setValue(response);
+          this.breadcrumbService.changeBreadcrumb(this.avRoute.snapshot, response.name);
         },
         (error) => {
           this.notification.showError(error.message);
