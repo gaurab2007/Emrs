@@ -141,6 +141,7 @@ namespace EmrsApp.API.Data
                         employee.City = rdr["City"].ToString();
                         employee.TotalDataCount = DataHelper.SafeGetInt(rdr, "Total");  //rdr.IsDBNull(rdr["Total"]) rdr["Total"].ToString();
                         employee.CreatedDate = DataHelper.SafeGetDate(rdr, "CreatedDate");
+                        employee.Dob = DataHelper.SafeGetDate(rdr, "Dob");
                         lstemployee.Add(employee);
                     }
                     con.Close();

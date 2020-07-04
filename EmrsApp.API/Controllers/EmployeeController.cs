@@ -6,10 +6,12 @@ using EmrsApp.API.Data;
 using EmrsApp.API.Dtos;
 using EmrsApp.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmrsApp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] 
+    [Authorize]
     [ApiController]
     public class EmployeeController : ControllerBase
     {

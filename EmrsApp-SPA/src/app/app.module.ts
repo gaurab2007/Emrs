@@ -23,6 +23,7 @@ import { NotificationService } from './Service/notification.service';
 import { EmployeeListsResolver } from './resolver/employeeList.resolver';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { PreventUnsavedChangesEdit } from './guards/prevent-unsaved-changes-employee-edit.guard';
+import { ErrorInterceptorProvider } from './service/error.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,6 +64,7 @@ export function tokenGetter() {
     EmployeeListsResolver,
     PreventUnsavedChanges,
     PreventUnsavedChangesEdit,
+    ErrorInterceptorProvider
   ],
   bootstrap: [AppComponent],
 })

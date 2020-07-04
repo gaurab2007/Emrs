@@ -10,6 +10,6 @@ namespace EmrsApp.API.Dtos
         public DateTime Dob { get; set; } 
         public string Department { get; set; }  
         public string City { get; set; }
-         public int TotalDataCount { get; internal set; }  
+        public int TotalDataCount { get; internal set; }  
     }
 }
