@@ -6,17 +6,13 @@
         <a class="nav-link" [routerLink]="['/employes']"> Employee </a>
       </li>
     </ul>
-    <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <!-- <span class="mr-1">
-          <img src="{{photoUrl || '../../../assets/user.png'}}">
-        </span> -->
+    <div class="dropdown" dropdown> 
       <a class="dropdown-toggle text-light" dropdownToggle>
         Welcome {{ authService.decodedToken?.unique_name | titlecase }}
       </a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/member/edit']">
-          <i class="fa fa-user"></i> Edit profile</a
-        >
+          <i class="fa fa-user"></i> Edit profile</a>
         <div class="dropDown divider"></div>
         <a class="dropdown-item" (click)="logout()">
           <i class="fa fa-sign-out"></i> Logout
@@ -24,11 +20,15 @@
       </div>
     </div>
   </nav>
-  <!-- <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Library</a></li>
-    <li class="breadcrumb-item active">Data</li>
-  </ol> -->
+  
+  <ol class="breadcrumb">
+    <!-- {{breadcrumbs | json}} -->
+    <li *ngFor="let breadcrumb of breadcrumbs">
+      <span [routerLink]="breadcrumb.url" routerLinkActive="router-link-active">
+        {{ breadcrumb.label }}
+      </span>
+    </li>
+  </ol>
 </div>
 
 <div *ngIf="!loggedIn()" class="sign-in-container">

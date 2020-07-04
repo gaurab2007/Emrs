@@ -1,6 +1,6 @@
 <form [formGroup]="employeeForm" #formDir="ngForm" novalidate>
   <div class="container mt-5">
-    <h2 class="text-center text-primary">Eployee</h2>
+    <h2 class="text-center text-primary">Edit Employee</h2>
     <hr />
     <div class="col-sm-8">
       <div *ngIf="employeeForm.dirty" class="alert alert-info">
@@ -17,12 +17,12 @@
           formControlName="name"
           placeholder="Name"
           [ngClass]="{
-            'is-invalid': employeeForm.get('name').errors
+            'is-invalid': employeeForm.get('name').errors && employeeForm.get('name').touched
           }"
         />
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.get('name').errors && formDir.submitted"
+          *ngIf="employeeForm.get('name').errors && employeeForm.get('name').touched"
         >
           Name is required.
         </div>
@@ -37,7 +37,7 @@
           data-val="true"
           formControlName="gender"
           [ngClass]="{
-            'is-invalid': employeeForm.get('gender').errors
+            'is-invalid': employeeForm.get('gender').errors && employeeForm.get('gender').touched
           }"
         >
           <option value="">Select Gender</option>
@@ -46,7 +46,7 @@
         </select>
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.get('gender').errors && formDir.submitted"
+          *ngIf="employeeForm.get('gender').errors && employeeForm.get('gender').touched"
         >
           Gender is required.
         </div>
@@ -61,7 +61,7 @@
         <input
           class="form-control is-invalid"
           [ngClass]="{
-            'is-invalid': employeeForm.get('dob').errors
+            'is-invalid': employeeForm.get('dob').errors && employeeForm.get('dob').touched
           }"
           class="form-control"
           placeholder="Date of Birth"
@@ -73,7 +73,7 @@
 
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.hasError('required', 'dob') && formDir.submitted"
+          *ngIf="employeeForm.hasError('required', 'dob') && employeeForm.get('dob').touched"
         >
           Date of birth is required
         </div>
@@ -89,14 +89,14 @@
           formControlName="department"
           placeholder="Department"
           [ngClass]="{
-            'is-invalid': employeeForm.get('department').errors
+            'is-invalid': employeeForm.get('department').errors && employeeForm.get('department').touched
           }"
         />
 
         <div
           class="invalid-feedback"
           *ngIf="
-            employeeForm.hasError('required', 'department') && formDir.submitted
+            employeeForm.hasError('required', 'department') && employeeForm.get('department').touched
           "
         >
           Department is required
@@ -114,13 +114,13 @@
           data-val="true"
           placeholder="City"
           [ngClass]="{
-            'is-invalid': employeeForm.get('city').errors
+            'is-invalid': employeeForm.get('city').errors && employeeForm.get('city').touched
           }"
         />
 
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.hasError('required', 'city') && formDir.submitted"
+          *ngIf="employeeForm.hasError('required', 'city') && employeeForm.get('city').touched"
         >
           City is required
         </div>

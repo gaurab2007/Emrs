@@ -1,11 +1,7 @@
-
-<form
-  [formGroup]="employeeForm" 
-  #formDir="ngForm" 
->
+<form [formGroup]="employeeForm" #formDir="ngForm">
   <div class="container mt-5">
-    <h2 class="text-center text-primary">Eployee</h2>
-    <hr /> 
+    <h2 class="text-center text-primary">New Employee</h2>
+    <hr />
     <div class="col-sm-8 offset-sm-2">
       <div *ngIf="employeeForm.dirty" class="alert alert-info">
         <strong>Information:</strong> You have made changes. Any unsaved changes
@@ -21,12 +17,16 @@
           formControlName="name"
           placeholder="Name"
           [ngClass]="{
-            'is-invalid': employeeForm.get('name').errors
+            'is-invalid':
+              employeeForm.get('name').errors &&
+              employeeForm.get('name').touched
           }"
         />
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.get('name').errors && formDir.submitted"
+          *ngIf="
+            employeeForm.get('name').errors && employeeForm.get('name').touched
+          "
         >
           Name is required.
         </div>
@@ -41,7 +41,9 @@
           data-val="true"
           formControlName="gender"
           [ngClass]="{
-            'is-invalid': employeeForm.get('gender').errors
+            'is-invalid':
+              employeeForm.get('gender').errors &&
+              employeeForm.get('gender').touched
           }"
         >
           <option value="">Select Gender</option>
@@ -50,25 +52,30 @@
         </select>
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.get('gender').errors && formDir.submitted"
+          *ngIf="
+            employeeForm.get('gender').errors &&
+            employeeForm.get('gender').touched
+          "
         >
           Gender is required.
         </div>
       </div>
     </div>
     <div class="form-group row">
-      <label class="control-label col-md-12" for="Department">Date of birth</label>
+      <label class="control-label col-md-12" for="Department"
+        >Date of birth</label
+      >
       <div class="col-md-4">
         <input
           class="form-control is-invalid"
           [ngClass]="{
             'is-invalid':
-            employeeForm.get('dob').errors  
+              employeeForm.get('dob').errors && employeeForm.get('dob').touched
           }"
           class="form-control"
           placeholder="Date of Birth"
           formControlName="dob"
-          type="text" 
+          type="text"
           bsDatepicker
           [bsConfig]="bsConfig"
         />
@@ -76,7 +83,8 @@
         <div
           class="invalid-feedback"
           *ngIf="
-            employeeForm.hasError('required', 'dob') && formDir.submitted
+            employeeForm.hasError('required', 'dob') &&
+            employeeForm.get('dob').touched
           "
         >
           Date of birth is required
@@ -93,14 +101,17 @@
           formControlName="department"
           placeholder="Department"
           [ngClass]="{
-            'is-invalid': employeeForm.get('department').errors
+            'is-invalid':
+              employeeForm.get('department').errors &&
+              employeeForm.get('department').touched
           }"
         />
 
         <div
           class="invalid-feedback"
           *ngIf="
-            employeeForm.hasError('required', 'department') && formDir.submitted
+            employeeForm.hasError('required', 'department') &&
+            employeeForm.get('department').touched
           "
         >
           Department is required
@@ -118,13 +129,18 @@
           data-val="true"
           placeholder="City"
           [ngClass]="{
-            'is-invalid': employeeForm.get('city').errors
+            'is-invalid':
+              employeeForm.get('city').errors &&
+              employeeForm.get('city').touched
           }"
         />
 
         <div
           class="invalid-feedback"
-          *ngIf="employeeForm.hasError('required', 'city') && formDir.submitted"
+          *ngIf="
+            employeeForm.hasError('required', 'city') &&
+            employeeForm.get('city').touched
+          "
         >
           City is required
         </div>
@@ -140,13 +156,18 @@
           data-val="true"
           placeholder="Username"
           [ngClass]="{
-            'is-invalid': employeeForm.get('username').errors
+            'is-invalid':
+              employeeForm.get('username').errors &&
+              employeeForm.get('username').touched
           }"
         />
 
         <div
           class="invalid-feedback"
-          *ngIf=" employeeForm.hasError('required', 'username') && formDir.submitted "
+          *ngIf="
+            employeeForm.hasError('required', 'username') &&
+            employeeForm.get('username').touched
+          "
         >
           Username is required
         </div>
@@ -163,14 +184,17 @@
           data-val="true"
           placeholder="Password"
           [ngClass]="{
-            'is-invalid': employeeForm.get('password').errors
+            'is-invalid':
+              employeeForm.get('password').errors &&
+              employeeForm.get('password').touched
           }"
         />
 
         <div
           class="invalid-feedback"
           *ngIf="
-            employeeForm.hasError('required', 'password') && formDir.submitted
+            employeeForm.hasError('required', 'password') &&
+            employeeForm.get('password').touched
           "
         >
           Username is required
@@ -179,7 +203,7 @@
           class="invalid-feedback"
           *ngIf="
             employeeForm.get('password').hasError('minlength') &&
-            employeeForm.get('password').touched && formDir.submitted
+            employeeForm.get('password').touched
           "
         >
           Password must be at least 4 characters
@@ -188,7 +212,7 @@
           class="invalid-feedback"
           *ngIf="
             employeeForm.get('password').hasError('maxlength') &&
-            employeeForm.get('password').touched && formDir.submitted
+            employeeForm.get('password').touched
           "
         >
           Password cannot exceed 8 characters
@@ -197,41 +221,55 @@
     </div>
 
     <div class="form-group row">
-      <label class="control-label col-md-12" for="confirmPassword">Confirm Password</label>
+      <label class="control-label col-md-12" for="confirmPassword"
+        >Confirm Password</label
+      >
       <div class="col-md-4">
         <input
           class="form-control is-invalid"
-          type="text"
+          type="password"
           formControlName="confirmPassword"
           data-val="true"
           placeholder="Confirm Password"
           [ngClass]="{
-            'is-invalid': employeeForm.get('confirmPassword').errors
-            || employeeForm.hasError('mismatch')
+            'is-invalid':
+              (employeeForm.get('confirmPassword').errors &&
+                employeeForm.get('confirmPassword').touched) ||
+              (employeeForm.get('confirmPassword').touched &&
+                employeeForm.hasError('mismatch'))
           }"
         />
 
         <div
           class="invalid-feedback"
           *ngIf="
-            employeeForm.hasError('required', 'confirmPassword') && formDir.submitted
+            employeeForm.hasError('required', 'confirmPassword') &&
+            employeeForm.get('confirmPassword').touched
           "
         >
-        Confirm Password is required
+          Confirm Password is required
         </div>
         <div
           class="invalid-feedback"
           *ngIf="
-            employeeForm.hasError('mismatch', 'confirmPassword') && formDir.submitted
+            employeeForm.hasError('mismatch') &&
+            employeeForm.get('confirmPassword').touched
           "
         >
-        Passwords must match
+          Passwords must match
         </div>
       </div>
     </div>
-    
+
     <div class="form-group">
-      <button type="submit" [disabled]="!employeeForm.valid" (click)="save()" class="btn btn-primary mr-2">Save</button>
+      <button
+        type="submit"
+        [disabled]="!employeeForm.valid"
+        (click)="save()"
+        class="btn btn-primary mr-2"
+      >
+        Save
+      </button>
       <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
     </div>
   </div>

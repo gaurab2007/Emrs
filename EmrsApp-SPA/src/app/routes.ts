@@ -20,7 +20,6 @@ export const appRoutes: Routes = [
         path: 'employes',
         component: EmployeeListComponent,
         resolve: { employees: EmployeeListsResolver },
-        data: { breadcrumb: 'Employees' },
       },
       {
         path: 'employes/new',
@@ -32,9 +31,9 @@ export const appRoutes: Routes = [
         path: 'employes/:id',
         component: EmployeeEditComponent,
         canDeactivate: [PreventUnsavedChangesEdit],
-        data: { breadcrumb: 'Detail' },
+        data: { breadcrumb: '' },
       },
     ],
-  }, 
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
