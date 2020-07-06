@@ -1,0 +1,46 @@
+<div *ngIf="!loggedIn()" class="sign-in-container">
+  <form
+    class="form-signin text-center"
+    #loginForm="ngForm"
+    (ngSubmit)="login()"
+  >
+    <img
+      class="mb-4"
+      src="../../assets/bootstrap-solid.svg"
+      alt=""
+      width="72"
+      height="72"
+    />
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label class="sr-only">Username</label>
+    <input
+      type="text"
+      class="form-control mr-sm-2"
+      placeholder="UserId"
+      required
+      name="username"
+      [(ngModel)]="model.username"
+    />
+    <label class="sr-only">Password</label>
+    <input
+      type="password"
+      class="form-control mr-sm-2"
+      placeholder="password"
+      required
+      name="password"
+      [(ngModel)]="model.password"
+    />
+    <div class="checkbox mb-3">
+      <label> <input type="checkbox" value="remember-me" /> Remember me </label>
+    </div>
+    <button
+      class="btn btn-lg btn-primary btn-block"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
+      Sign in
+    </button>
+    <p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+  </form>
+</div>
+

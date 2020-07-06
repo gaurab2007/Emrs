@@ -18,8 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
-import { NavComponent } from './nav/nav.component';
-import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component'; 
 import { appRoutes } from './routes';
 import { AuthService } from './Service/auth.service';
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
@@ -31,6 +30,8 @@ import { PreventUnsavedChangesEdit } from './guards/prevent-unsaved-changes-empl
 import { ErrorInterceptorProvider } from './service/error.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './service/loader.service';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -39,6 +40,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     NavComponent,
     HomeComponent,
     EmployeeListComponent,

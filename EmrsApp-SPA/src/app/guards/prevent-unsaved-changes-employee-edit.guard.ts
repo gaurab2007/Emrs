@@ -6,7 +6,7 @@ import { EmployeeEditComponent } from '../employee/employee-edit/employee-edit.c
 export class PreventUnsavedChangesEdit
   implements CanDeactivate<EmployeeEditComponent> {
   canDeactivate(component: EmployeeEditComponent) {
-    if (component.employeeForm.dirty) {
+    if (component && component.employeeForm.dirty) {
       return confirm(
         'Are you sure you want to continue?  Any unsaved changes will be lost'
       );
