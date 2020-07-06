@@ -9,6 +9,12 @@ import { PreventUnsavedChangesEdit } from './guards/prevent-unsaved-changes-empl
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { TenantListComponent } from './tenent/tenant-list/tenant-list.component';
+import { TenantListsResolver } from './resolver/tenantList.resolver';
+import { TenantNewComponent } from './tenent/tenant-new/tenant-new.component';
+import { PreventUnsavedChangesTenant } from './guards/prevent-unsaved-changes-tenant.guard';
+import { TenantEditComponent } from './tenent/tenant-edit/tenant-edit.component';
+import { PreventUnsavedChangesTenantEdit } from './guards/prevent-unsaved-changes-tenant-edit.guard';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -34,6 +40,21 @@ export const appRoutes: Routes = [
         component: EmployeeEditComponent,
         canDeactivate: [PreventUnsavedChangesEdit],
         data: { breadcrumb: '' },
+      },
+      {
+        path: 'tenants',
+        component: TenantListComponent,
+        resolve: { tenants: TenantListsResolver },
+      },
+      {
+        path: 'tenants/new',
+        component: TenantNewComponent,
+        canDeactivate: [PreventUnsavedChangesTenant],
+      },
+      {
+        path: 'tenants/:id',
+        component: TenantEditComponent,
+        canDeactivate: [PreventUnsavedChangesTenantEdit],
       },
     ],
   },

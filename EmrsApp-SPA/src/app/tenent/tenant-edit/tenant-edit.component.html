@@ -1,0 +1,66 @@
+<form #tenantForm="ngForm" id="tenantForm" (ngSubmit)="update()">
+  <div class="container mt-5" *ngIf="tenant">
+    <h2 class="text-center text-primary">New Tenant</h2>
+    <hr />
+    <div class="col-sm-8 offset-sm-2">
+      <div *ngIf="tenantForm.dirty" class="alert alert-info">
+        <strong>Information:</strong> You have made changes. Any unsaved changes
+        will be lost!
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label col-md-12">Tenant Name</label>
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          name="tenantName"
+          #tenantName="ngModel"
+          [(ngModel)]="tenant.tenantName"
+          placeholder="Tenant Name"
+          required
+          [ngClass]="{
+            'is-invalid': tenantName.touched && tenantName.invalid && tenantName.errors.required
+          }"
+        />
+        <div class="invalid-feedback"
+          *ngIf="tenantName.touched && tenantName.invalid && tenantName.errors.required"
+        >
+          Tenant Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="form-control-label col-md-12">Workspace Name</label>
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control"
+          name="workspaceName"
+          #workspaceName="ngModel"
+          [(ngModel)]="tenant.workspaceName"
+          placeholder="Workspace Name"
+          required
+          [ngClass]="{
+            'is-invalid': workspaceName.touched && workspaceName.invalid && workspaceName.errors.required
+          }"
+        />
+        <div class="invalid-feedback"
+          *ngIf="workspaceName.touched && workspaceName.invalid && workspaceName.errors.required"
+        >
+          Workspace Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        type="submit"
+        [disabled]="!tenantForm.valid"
+        class="btn btn-primary mr-2"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

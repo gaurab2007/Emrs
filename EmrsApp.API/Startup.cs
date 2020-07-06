@@ -33,6 +33,7 @@ namespace EmrsApp.API
         {
             services.AddCors();
             services.AddTransient<IEmployee, EmployeeRepository>();
+            services.AddScoped<ITenant, TenantRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddControllers();
             services.AddAutoMapper(typeof(EmployeeRepository).Assembly);

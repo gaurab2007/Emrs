@@ -32,6 +32,13 @@ import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './service/loader.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { PreventUnsavedChangesTenant } from './guards/prevent-unsaved-changes-tenant.guard';
+import { PreventUnsavedChangesTenantEdit } from './guards/prevent-unsaved-changes-tenant-edit.guard';
+import { TenantListComponent } from './tenent/tenant-list/tenant-list.component';
+import { TenantEditComponent } from './tenent/tenant-edit/tenant-edit.component';
+import { TenantNewComponent } from './tenent/tenant-new/tenant-new.component';
+import { TenantListsResolver } from './resolver/tenantList.resolver';
+import { TenantService } from './Service/tenant.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,6 +54,9 @@ export function tokenGetter() {
     EmployeeNewComponent,
     EmployeeEditComponent,
     LoaderComponent,
+    TenantListComponent,
+    TenantEditComponent,
+    TenantNewComponent
   ],
   imports: [
     BrowserModule,
@@ -77,10 +87,14 @@ export function tokenGetter() {
     AuthService,
     NotificationService,
     EmployeeListsResolver,
+    TenantListsResolver,
+    TenantService,
     PreventUnsavedChanges,
     PreventUnsavedChangesEdit,
     ErrorInterceptorProvider,
     LoaderService,
+    PreventUnsavedChangesTenant,
+    PreventUnsavedChangesTenantEdit,
   ],
   bootstrap: [AppComponent],
 })
