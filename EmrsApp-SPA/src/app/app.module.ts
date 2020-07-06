@@ -10,6 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BreadcrumbModule } from 'angular-crumbs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
@@ -24,6 +29,8 @@ import { EmployeeListsResolver } from './resolver/employeeList.resolver';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { PreventUnsavedChangesEdit } from './guards/prevent-unsaved-changes-employee-edit.guard';
 import { ErrorInterceptorProvider } from './service/error.interceptor';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './service/loader.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -37,6 +44,7 @@ export function tokenGetter() {
     EmployeeListComponent,
     EmployeeNewComponent,
     EmployeeEditComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +53,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     BreadcrumbModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot(),
@@ -57,6 +66,10 @@ export function tokenGetter() {
         blacklistedRoutes: ['localhost:5000/api/auth'],
       },
     }),
+    MatSidenavModule,
+    MatDividerModule,
+    MatCardModule,
+    MatTableModule,
   ],
   providers: [
     AuthService,
@@ -64,7 +77,8 @@ export function tokenGetter() {
     EmployeeListsResolver,
     PreventUnsavedChanges,
     PreventUnsavedChangesEdit,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    LoaderService,
   ],
   bootstrap: [AppComponent],
 })
